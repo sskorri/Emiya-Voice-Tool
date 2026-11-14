@@ -1,0 +1,73 @@
+/* The Models page (BUILD_SPEC 6.11; Main.dc.html L854-957): the model cards, the VRAM and Behavior cards and
+   the Load History. Colours come from the theme's tokens in emiya.css; the resident card's ring is the softer
+   --gold-ring-soft (0.35 instead of 0.45, M L2817). This file loads before the widget rules of emiya.css: where
+   a widget class sets the same property (vt-card, vt-b30, em-row), the rule here carries two classes. */
+
+.vt-models { display: flex; flex-direction: column; gap: 14px; }
+.vt-models-section { min-width: 0; }
+
+/* ---- the cards (M L857-884) ------------------------------------------------------------------------- */
+
+.vt-models-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.vt-card.vt-models-card { padding: 4px 14px 14px; }
+.vt-card.vt-models-card.is-ringed { box-shadow: var(--gold-ring-soft); }
+.vt-models-head { display: flex; align-items: center; gap: 8px; height: 44px; }
+.vt-models-name { flex: 1 1 auto; min-width: 0; margin: 0; font-size: 15px; font-weight: 600; color: var(--text); }
+.vt-models-facts { display: block; }
+/* 30 px plus the hairline, as the mockup's content-box rows */
+.vt-models-fact {
+  box-sizing: content-box; display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  height: 30px; border-top: 1px solid var(--hairline); font-size: 13px;
+}
+.vt-models-fact-label { flex: none; color: var(--muted); white-space: nowrap; }
+.vt-models-fact-value {
+  min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; text-align: right;
+  color: var(--text); font-variant-numeric: tabular-nums;
+}
+.vt-models-card .vt-models-act { width: 100%; height: 32px; margin-top: 10px; padding: 0 14px; }
+
+/* ---- below the cards: VRAM and Behavior beside the Load History (M L886-954) -------------------------- */
+
+.vt-models-lower {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 16px; align-items: start;
+}
+.vt-models-left { min-width: 0; display: flex; flex-direction: column; gap: 14px; }
+
+/* VRAM (M L888-905): the 8 px meter is the widget's tall variant; without CUDA the meter and its legend hide,
+   and the legend carries the 12 px above the GPU row, so that row then starts at the card's padding */
+.vt-card.vt-models-vram { padding: 14px; }
+.vt-models-legend {
+  display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 12px 0; font-size: 13px; color: var(--text-soft);
+  font-variant-numeric: tabular-nums;
+}
+.vt-models-key { display: inline-flex; align-items: center; gap: 6px; }
+.vt-models-swatch { flex: none; box-sizing: border-box; width: 8px; height: 8px; border-radius: 2px; }
+.vt-models-swatch.is-app { background: var(--gold); }
+.vt-models-swatch.is-other { background: var(--meter-other); }
+.vt-models-swatch.is-free { border: 1px solid var(--dot-edge); }
+.vt-models-gpu { display: flex; align-items: center; gap: 10px; }
+.vt-models-gpu-line { flex: 1 1 auto; min-width: 0; font-size: 12px; color: var(--faint); }
+.vt-models-free { flex: none; }
+
+/* Behavior (M L906-941) */
+.vt-card.vt-models-behavior { padding: 4px 14px; }
+.vt-models-warmup { width: 200px; }
+.vt-models-idle { width: 264px; }
+/* the locked fact keeps vt-off (no hover plate) at full strength, as in the mockup; a long refusal wraps */
+.vt-models .em-row.vt-off { opacity: 1; }
+.vt-models-limit.em-row { height: auto; min-height: 40px; }
+.vt-models-limit-value {
+  flex: 0 1 auto; min-width: 0; display: inline-flex; align-items: center; gap: 6px; font-size: 15px;
+  color: var(--muted);
+}
+.vt-models-limit-value .vt-ico { flex: none; }
+.vt-models-limit-text { min-width: 0; }
+.vt-models-limit-note { flex: none; font-size: 13px; color: var(--faint); }
+
+/* Load History (M L943-953): column-reverse keeps the newest line in view unless the reader scrolled up */
+.vt-card.vt-models-history {
+  height: 310px; overflow-y: auto; display: flex; flex-direction: column-reverse; padding: 12px 14px;
+}
+.vt-models-lines { display: flex; flex-direction: column; gap: 6px; margin-bottom: auto; }
+.vt-models-line { margin: 0; font-size: 13px; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.vt-models-empty { margin: 0 0 auto; font-size: 13px; color: var(--muted); }

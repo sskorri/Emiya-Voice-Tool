@@ -1,0 +1,81 @@
+/* The Settings page (BUILD_SPEC 6.12; Main.dc.html L959-1116): a minmax(0, 1fr) | 320 px grid (720 | 16 | 320
+   in the 1056 px content box). The left column holds the section of the current header tab (General, Effects
+   or Keys), the right column the About card on every tab. The mockup's inline styles as classes; colours come
+   only from the tokens of emiya.css. Every rule starts with .vt-settings, so it outranks the shared rules. */
+
+.vt-settings { display: grid; grid-template-columns: minmax(0, 1fr) 320px; column-gap: 16px; align-items: start; }
+.vt-settings .vt-settings-col { min-width: 0; display: flex; flex-direction: column; gap: 14px; }
+.vt-settings .vt-settings-section { min-width: 0; }
+.vt-settings .vt-settings-card { padding: 4px 14px; }
+.vt-settings .vt-settings-card.is-keys,
+.vt-settings .vt-settings-card.is-about { padding: 4px 14px 8px; }
+.vt-settings .vt-settings-foot { margin: 8px 0 0 14px; font-size: 13px; color: var(--faint); }
+
+/* General (M L967-1006): the read-only path field, Browse…, the segmented groups and their notes */
+.vt-settings .vt-set-path {
+  box-sizing: border-box; flex: 1 1 auto; min-width: 0; height: 30px; padding: 0 10px; border-radius: 7px;
+  overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 15px; line-height: 30px;
+  background: var(--input-bg); color: var(--text-soft);
+}
+.vt-settings .vt-set-path:hover { background: var(--input-hover); }
+.vt-settings .vt-set-browse { flex: none; }
+.vt-settings .vt-set-segs.is-device,
+.vt-settings .vt-set-segs.is-art { width: 200px; }
+.vt-settings .vt-set-segs.is-backend { width: 330px; }
+.vt-settings .vt-set-segs.is-motion { width: 280px; }
+.vt-settings .vt-set-note {
+  flex: 1 1 auto; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 13px;
+  color: var(--faint); font-variant-numeric: tabular-nums;
+}
+
+/* Effects (M L1023-1029): the Effect Speed range and its percentage */
+.vt-settings .vt-set-speed { flex: none; width: 300px; display: flex; align-items: center; gap: 10px; }
+.vt-settings .vt-set-speed-text {
+  flex: none; min-width: 52px; text-align: right; font-size: 15px; color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Keys (M L1067-1078): the header row and the two 116 px slots of each row */
+.vt-settings .vt-keys-head {
+  display: flex; align-items: center; gap: 10px; height: 30px; border-bottom: 1px solid var(--divider);
+  font-size: 13px; color: var(--muted);
+}
+.vt-settings .vt-keys-command { flex: 1 1 auto; min-width: 0; }
+.vt-settings .vt-keys-slot { flex: none; width: 116px; text-align: center; }
+.vt-settings .vt-key-slots { flex: none; display: flex; gap: 8px; }
+
+/* About (M L1091-1110): the logo and the name, then the facts */
+.vt-settings .vt-about-head { display: flex; align-items: center; gap: 10px; padding: 10px 0; }
+.vt-settings .vt-about-titles { min-width: 0; }
+.vt-settings .vt-about-name { margin: 0; font-size: 15px; font-weight: 600; color: var(--text); }
+.vt-settings .vt-about-sub { margin: 2px 0 0; font-size: 13px; color: var(--muted); }
+.vt-settings .vt-about-row {
+  display: flex; justify-content: space-between; gap: 10px; padding: 7px 0; border-top: 1px solid var(--hairline);
+  font-size: 13px;
+}
+.vt-settings .vt-about-key { flex: none; color: var(--muted); }
+/* Keep the native select's keyboard and accessibility semantics. Style its top-layer popup in WebView2. */
+.vt-settings .vt-call-device {
+  flex: 0 1 320px; min-width: 0; height: 29px; padding: 0 10px; border-radius: 7px;
+  justify-content: space-between; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  background: var(--input-bg); color: var(--text); color-scheme: dark; font: inherit;
+}
+.vt-settings .vt-call-device:focus-visible { outline: 1.5px solid var(--gold); outline-offset: 2px; }
+.vt-settings .vt-call-device option { background: var(--pop-bg); color: var(--text); }
+.vt-settings .vt-call-device, .vt-settings .vt-call-device::picker(select) { appearance: base-select; }
+.vt-settings .vt-call-device::picker-icon { flex: none; color: var(--muted); }
+.vt-settings .vt-call-device::picker(select) {
+  box-sizing: border-box; margin-block: 4px; max-height: min(300px, 55vh); overflow: auto;
+  border: 0; border-radius: 10px; padding: 6px; background: var(--pop-bg); color: var(--text);
+  box-shadow: var(--pop-ring), var(--pop-shadow); font: inherit;
+}
+.vt-settings .vt-call-device option {
+  min-height: 30px; padding: 4px 10px; border-radius: 7px; white-space: normal; overflow-wrap: anywhere;
+}
+.vt-settings .vt-call-device option:checked { background: var(--gold-tint); color: var(--gold); font-weight: 600; }
+.vt-settings .vt-call-device option:not(:checked):hover { background: var(--hover); }
+.vt-settings .vt-call-device option:focus-visible { outline: 1.5px solid var(--gold); outline-offset: -2px; }
+.vt-settings .is-call-choice .em-seg { flex: none; }
+.vt-settings .is-call-choice .em-seg-face { padding-inline: 8px; }
+/* a long real value (an Output Folder outside the data root, a detection error) wraps inside the card */
+.vt-settings .vt-about-value { min-width: 0; color: var(--text); text-align: right; overflow-wrap: anywhere; }

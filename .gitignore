@@ -1,0 +1,45 @@
+# Local voice library, generated speech, preferences and application state
+/voices/
+/outputs/
+/cache/
+/ui_settings.json
+/ui_settings.json.*
+/.dev/
+/.nicegui/
+/logs/
+/portable-data/
+
+# Installed environments, model downloads and distributable builds
+/venv/
+/.venv/
+/models/
+/runtime/
+/dist/
+/build/
+*.egg-info/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Raw investigation outputs and standalone design exports
+/artifacts/
+/spikes/
+/UI Theme Mockups/
+
+# Local overrides, credentials and editor state
+.env
+.env.*
+!.env.example
+/.codex/
+/.claude/
+/.idea/
+/.vscode/
+*.pem
+*.pfx
+*.p12
+.DS_Store
+Thumbs.db

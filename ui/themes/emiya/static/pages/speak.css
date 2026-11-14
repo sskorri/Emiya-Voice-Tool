@@ -1,0 +1,165 @@
+/* The Speak page (BUILD_SPEC 6.7; Main.dc.html L136-429). Every rule is scoped under .vt-speak, the page root,
+   so it outranks the widget defaults of emiya.css, which imports this file before its own rules. Colours are
+   the emiya.css tokens. Quasar makes every element border-box; where the mockup's inline box relies on the
+   browser's content-box (a height plus a border, a width plus a padding) the rule says so. */
+
+.vt-speak { display: grid; grid-template-columns: 320px minmax(0, 1fr); column-gap: 16px; align-items: start; }
+.vt-speak .vt-sp-col { min-width: 0; display: flex; flex-direction: column; gap: 14px; }
+.vt-speak .vt-sp-section { min-width: 0; }
+.vt-speak .vt-sp-fill { flex: 1 1 auto; }
+
+/* section captions with a right slot: Script and Takes carry their 2 px on the whole row (M L272, L390) */
+.vt-speak .vt-section-label.has-right.vt-sp-head-pad { padding-top: 2px; }
+.vt-speak .vt-sp-head-pad .vt-section-text { padding-top: 0; }
+
+/* ---- the Voice panel (M L141-186) ---------------------------------------------------------------------- */
+
+.vt-speak .vt-sp-voice { height: 372px; display: flex; flex-direction: column; padding: 8px; }
+.vt-speak .vt-sp-voice-ready { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
+.vt-speak .vt-sp-voice-list { flex: 1 1 auto; min-height: 0; overflow-y: auto; }
+.vt-speak .vt-sp-group-head {
+  box-sizing: content-box; height: 26px; display: flex; align-items: center; gap: 8px; padding: 0 8px;
+  border-bottom: 1px solid var(--divider); font-size: 13px; color: var(--muted);
+}
+.vt-speak .vt-sp-group + .vt-sp-group .vt-sp-group-head { margin-top: 8px; }
+.vt-speak .vt-sp-group-label { flex: 1 1 auto; min-width: 0; }
+.vt-speak .vt-sp-group-rows { display: flex; flex-direction: column; gap: 1px; padding-top: 4px; }
+.vt-speak .vt-li {
+  position: relative; box-sizing: border-box; display: flex; align-items: center; min-height: 36px;
+  border-radius: 7px; background: transparent;
+}
+.vt-speak .vt-li.on { background: var(--gold-tint); }
+.vt-speak .vt-li-pick {
+  box-sizing: border-box; flex: 1 1 auto; min-width: 0; min-height: 36px; display: flex; align-items: center;
+  gap: 8px; padding: 0 8px; border: 0; background: transparent; color: var(--text); text-align: left;
+}
+.vt-speak .vt-li.on .vt-li-pick { color: var(--gold); }
+.vt-speak .vt-li-pick:disabled { opacity: 0.45; }
+.vt-speak .vt-li-id {
+  flex: 1 1 auto; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 15px;
+  font-weight: 400;
+}
+.vt-speak .vt-li.on .vt-li-id { font-weight: 600; }
+.vt-speak .vt-li-sub { flex: none; font-size: 13px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.vt-speak .vt-li .vt-aud { margin-right: 6px; }
+
+.vt-speak .vt-sp-voice-foot {
+  flex: none; display: flex; align-items: center; gap: 10px; margin: 6px 6px 0; padding-top: 9px;
+  border-top: 1px solid var(--divider);
+}
+.vt-speak .vt-sp-forge-new { flex: 1 1 auto; }
+.vt-speak .vt-sp-count { flex: none; font-size: 13px; color: var(--muted); white-space: nowrap; }
+
+.vt-speak .vt-sp-empty {
+  flex: 1 1 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  padding: 16px; text-align: center;
+}
+.vt-speak .vt-sp-empty-title { margin: 4px 0 0; font-size: 15px; font-weight: 600; color: var(--text); }
+.vt-speak .vt-sp-empty-text { margin: 0; max-width: 240px; font-size: 13px; color: var(--muted); }
+.vt-speak .vt-sp-empty-actions { display: flex; flex-direction: column; gap: 8px; width: 220px; margin-top: 8px; }
+.vt-speak .vt-sp-voice-message {
+  margin: auto 0; padding: 16px; font-size: 13px; color: var(--muted); text-align: center;
+}
+
+/* ---- Delivery (M L188-265) ------------------------------------------------------------------------------ */
+
+.vt-speak .vt-sp-delivery { padding: 4px 14px; }
+.vt-speak .vt-sp-delivery .vt-row-label { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.vt-speak .vt-sp-presets { width: 204px; }
+.vt-speak .vt-sp-presets .em-seg-face { padding: 0 2px; }
+.vt-speak .vt-sp-knob { flex: none; width: 176px; display: flex; align-items: center; gap: 8px; }
+.vt-speak .vt-sp-knob-value {
+  flex: none; min-width: 40px; text-align: right; font-size: 15px; font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.vt-speak .vt-sp-locked { flex: none; display: flex; align-items: center; gap: 8px; }
+.vt-speak .vt-sp-locked-name { font-size: 15px; color: var(--muted); }
+.vt-speak .vt-sp-note { display: flex; align-items: center; gap: 8px; min-height: 20px; margin: 8px 0 0 14px; }
+.vt-speak .vt-sp-note-text { flex: 1 1 auto; min-width: 0; margin: 0; font-size: 13px; }
+.vt-speak .vt-sp-note .em-btn { flex: none; }
+
+/* ---- the Script card (M L271-312) ----------------------------------------------------------------------- */
+
+.vt-speak .vt-sp-stats { font-size: 13px; line-height: 17px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.vt-speak .vt-sp-stats.vt-c-warn { color: var(--warn); }
+.vt-speak .vt-sp-script { padding: 8px 14px 4px; }
+.vt-speak .vt-sp-toolbar { height: 30px; display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
+.vt-speak .vt-sp-tags { display: contents; }
+.vt-speak .vt-tag.em-btn { padding: 0 8px; }
+.vt-speak .vt-tag.em-btn:not(:disabled):hover { background: var(--tag-hover); color: var(--gold); }
+.vt-speak .vt-sp-fix.em-btn { background: var(--gold-wash); box-shadow: var(--gold-ring); color: var(--gold); }
+.vt-speak .vt-sp-clear { flex: none; }
+.vt-speak .vt-sp-gen { display: flex; gap: 8px; padding-top: 10px; }
+.vt-speak .em-primary.vt-sp-generate { flex: 1 1 auto; min-width: 0; padding: 0 12px; }
+.vt-speak .vt-sp-gen .em-btn { flex: none; }
+.vt-speak .vt-sp-summary {
+  box-sizing: border-box; height: 26px; display: flex; align-items: center; gap: 8px; font-size: 13px;
+  white-space: nowrap;
+}
+.vt-speak .vt-sp-summary-text { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.vt-speak .vt-sp-summary .vt-link { flex: none; }
+
+/* ---- the Take card (M L314-386) ------------------------------------------------------------------------- */
+
+.vt-speak .vt-sp-take { position: relative; padding: 6px 14px 4px; }
+.vt-speak .vt-sp-take-head { display: flex; align-items: center; gap: 6px; padding: 4px 0 8px; }
+.vt-speak .vt-sp-take-text { flex: 1 1 auto; min-width: 0; }
+.vt-speak .vt-sp-take-title { margin: 0; font-size: 15px; font-weight: 600; color: var(--text); }
+.vt-speak .vt-sp-take-caption {
+  margin: 2px 0 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 13px;
+  color: var(--muted); font-variant-numeric: tabular-nums;
+}
+.vt-speak .vt-sp-take-controls { margin-top: 4px; }
+.vt-speak .vt-sp-time {
+  flex: none; font-size: 15px; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.vt-speak .vt-sp-ab { width: 220px; }
+.vt-speak .vt-sp-ab .em-seg-face { padding: 0 6px; }
+.vt-speak .vt-sp-take-controls .em-btn { flex: none; }
+
+/* ---- "Takes · This Session" (M L388-425) ---------------------------------------------------------------- */
+
+.vt-speak .vt-sp-all { line-height: 17px; }
+.vt-speak .vt-sp-session { height: 186px; display: flex; flex-direction: column; padding: 6px 8px; }
+.vt-speak .vt-sp-session-cols {
+  box-sizing: content-box; flex: none; display: flex; align-items: center; gap: 8px; height: 26px;
+  padding: 0 0 0 8px; border-bottom: 1px solid var(--divider); font-size: 13px; color: var(--muted);
+}
+.vt-speak .vt-sp-c-no { flex: none; width: 22px; }
+.vt-speak .vt-sp-c-text { flex: 1 1 auto; min-width: 0; }
+.vt-speak .vt-sp-c-voice { flex: none; width: 82px; }
+.vt-speak .vt-sp-c-num { flex: none; width: 40px; text-align: right; }
+.vt-speak .vt-sp-c-len { flex: none; width: 52px; text-align: right; }
+.vt-speak .vt-sp-c-actions { flex: none; width: 94px; }
+.vt-speak:has(.vt-call-send:not(.hidden)) :is(.vt-sp-c-actions, .vt-trow-actions) { width: 145px; }
+.vt-speak .vt-call-switch { flex: none; width: auto; height: 26px; gap: 5px; white-space: nowrap; }
+.vt-speak .vt-sp-session-list { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding-top: 4px; }
+.vt-speak .vt-trow {
+  box-sizing: border-box; display: flex; align-items: center; gap: 8px; min-height: 32px; border-radius: 7px;
+  background: transparent;
+}
+.vt-speak .vt-trow.on { background: var(--gold-tint); }
+.vt-speak .vt-trow-pick {
+  box-sizing: border-box; flex: 1 1 auto; min-width: 0; min-height: 32px; display: flex; align-items: center;
+  gap: 8px; padding: 0 0 0 8px; border: 0; background: transparent; color: var(--text); text-align: left;
+  font-variant-numeric: tabular-nums;
+}
+.vt-speak .vt-trow.on .vt-trow-pick { color: var(--gold); }
+.vt-speak .vt-trow-text {
+  overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 15px; font-weight: 400;
+}
+.vt-speak .vt-trow.on .vt-trow-text { font-weight: 600; }
+.vt-speak .vt-trow-sub { font-size: 13px; color: var(--muted); }
+.vt-speak .vt-trow-pick .vt-sp-c-voice { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.vt-speak .vt-trow.on .vt-trow-sub { color: var(--gold-dim); }
+.vt-speak .vt-trow.is-generating .vt-trow-pick { color: var(--gold-dim); cursor: default; }
+.vt-speak .vt-trow.is-generating .vt-trow-sub { color: var(--faint); }
+.vt-speak .vt-trow-actions {
+  box-sizing: content-box; flex: none; width: 94px; display: flex; align-items: center; justify-content: flex-end;
+  gap: 4px; padding-right: 6px;
+}
+.vt-speak .vt-pin {
+  flex: none; width: 22px; height: 22px; padding: 0; border: 0; border-radius: 5px; background: var(--off-bg);
+  color: var(--muted); font-size: 12px; font-weight: 600;
+}
+.vt-speak .vt-pin.is-on { background: var(--gold-wash); box-shadow: var(--gold-ring); color: var(--gold); }

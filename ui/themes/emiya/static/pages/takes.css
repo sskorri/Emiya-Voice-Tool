@@ -1,0 +1,128 @@
+/* The Takes page (BUILD_SPEC 6.10; Main.dc.html L717-852): the take list and the A/B compare card.
+   Every colour is a token of emiya.css (R7); rules are scoped to .vt-takes. */
+
+.vt-takes { display: grid; grid-template-columns: minmax(0, 1fr) 360px; column-gap: 16px; align-items: start; }
+.vt-takes .vt-tcol { min-width: 0; }
+
+/* ---- the list column: caption, then the 690 px card (M L720-775) ---------------------------------------- */
+
+.vt-takes .vt-tcaption {
+  box-sizing: border-box; height: 22px; display: flex; align-items: flex-start; justify-content: space-between;
+  padding: 2px 4px 0 14px; font-size: 13px; line-height: 17px; color: var(--muted);
+}
+.vt-takes .vt-tcaption-title { margin: 0; }
+.vt-takes .vt-tcaption-count { font-variant-numeric: tabular-nums; }
+.vt-takes .vt-tlist-card { height: 690px; display: flex; flex-direction: column; gap: 8px; padding: 10px 8px; }
+
+/* search and the voice and model filter menus (M L726-730; D-T2) */
+.vt-takes .vt-tsearch { flex: none; display: flex; align-items: center; gap: 8px; padding: 0 6px; }
+.vt-takes .vt-tsearch .em-input.q-field { flex: 1 1 auto; min-width: 0; }
+.vt-takes .vt-tfilter { position: relative; flex: none; }
+.vt-takes .vt-tmenu-backdrop { display: none; position: fixed; inset: 0; z-index: 39; }
+.vt-takes .vt-tmenu {
+  display: none; position: absolute; z-index: 40; top: 33px; right: 0; box-sizing: border-box; width: 220px;
+  max-height: 300px; overflow-y: auto; padding: 6px; border-radius: 10px; background: var(--pop-bg);
+  box-shadow: var(--pop-ring), var(--pop-shadow);
+}
+.vt-takes .vt-tfilter.is-open .vt-tmenu-backdrop { display: block; }
+.vt-takes .vt-tfilter.is-open .vt-tmenu { display: block; animation: vtPopIn 0.14s ease-out; }
+.vt-takes .vt-tmenu .vt-option-name { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+
+/* the column header and the rows (M L731-762) */
+.vt-takes .vt-tbody { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
+.vt-takes .vt-thead {
+  flex: none; display: flex; align-items: center; gap: 8px; height: 26px; padding: 0 0 0 8px;
+  border-bottom: 1px solid var(--divider); font-size: 13px; color: var(--muted);
+}
+.vt-takes .vt-tscroll { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding-top: 4px; }
+.vt-takes .vt-tc-no { flex: none; width: 22px; }
+.vt-takes .vt-tc-text { flex: 1 1 auto; min-width: 0; }
+.vt-takes .vt-tc-voice { flex: none; width: 76px; }
+.vt-takes .vt-tc-model { flex: none; width: 82px; }
+.vt-takes .vt-tc-num { flex: none; width: 36px; text-align: right; }
+.vt-takes .vt-tc-len { flex: none; width: 46px; text-align: right; }
+.vt-takes .vt-tc-when { flex: none; width: 52px; text-align: right; }
+.vt-takes .vt-tc-tools { flex: none; width: 82px; }
+.vt-takes:has(.vt-call-send:not(.hidden)) :is(.vt-tc-tools, .vt-trow-tools) { width: 133px; }
+.vt-takes .vt-call-send { flex: none; padding: 0 6px; }
+
+.vt-takes .vt-trow {
+  box-sizing: border-box; display: flex; align-items: center; gap: 8px; min-height: 32px; border-radius: 7px;
+  background: transparent;
+}
+.vt-takes .vt-trow.on { background: var(--gold-tint); }
+.vt-takes .vt-trow-main {
+  box-sizing: border-box; flex: 1 1 auto; min-width: 0; min-height: 32px; display: flex; align-items: center;
+  gap: 8px; padding: 0 0 0 8px; border: 0; background: transparent; color: var(--text); text-align: left;
+  font-variant-numeric: tabular-nums;
+}
+.vt-takes .vt-trow-main > span { font-size: 13px; color: var(--muted); }
+.vt-takes .vt-trow-main > .vt-tc-text {
+  overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 15px; color: var(--text);
+}
+.vt-takes .vt-trow-main > .vt-tc-voice, .vt-takes .vt-trow-main > .vt-tc-model {
+  overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+}
+.vt-takes .vt-trow.on .vt-trow-main > span { color: var(--gold-dim); }
+.vt-takes .vt-trow.on .vt-trow-main > .vt-tc-text { color: var(--gold); font-weight: 600; }
+.vt-takes .vt-trow.is-missing .vt-trow-main > .vt-tc-text { opacity: 0.5; }
+.vt-takes .vt-trow-tools {
+  box-sizing: border-box; flex: none; width: 82px; display: flex; align-items: center; justify-content: flex-end;
+  gap: 4px; padding-right: 6px;
+}
+.vt-takes .vt-pin {
+  box-sizing: border-box; flex: none; width: 22px; height: 22px; display: inline-flex; align-items: center;
+  justify-content: center; padding: 0; border: 0; border-radius: 5px; background: var(--off-bg); color: var(--muted);
+  font-size: 12px; font-weight: 600;
+}
+.vt-takes .vt-pin[aria-pressed="true"] { background: var(--gold-wash); box-shadow: var(--gold-ring); color: var(--gold); }
+.vt-takes .vt-trow .vt-star.em-icon:not(:disabled):hover { background: transparent; }
+.vt-takes .vt-tmore { margin: 8px; }
+.vt-takes .vt-tempty { margin: 8px; font-size: 15px; color: var(--muted); }
+
+/* the footer: Export Starred…, Show Folder, Remove Unstarred and the foot line (M L768-773) */
+.vt-takes .vt-tfoot {
+  flex: none; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 9px 6px 0;
+  border-top: 1px solid var(--divider);
+}
+.vt-takes .vt-tfoot .em-btn { flex: none; }
+.vt-takes .vt-tfoot-text {
+  flex: 1 1 auto; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; text-align: right;
+  font-size: 13px; color: var(--faint); font-variant-numeric: tabular-nums;
+}
+
+/* ---- the compare column (M L777-848) ---------------------------------------------------------------- */
+
+.vt-takes .vt-tcmp-card { padding: 6px 14px 14px; }
+.vt-takes .vt-tcmp-side { padding: 6px 0; }
+.vt-takes .vt-tcmp-head { display: flex; align-items: baseline; justify-content: space-between; }
+.vt-takes .vt-tcmp-title { margin: 0; font-size: 15px; font-weight: 600; color: var(--text); }
+.vt-takes .vt-tcmp-title.is-active { color: var(--gold); }
+.vt-takes .vt-tcmp-len { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.vt-takes .vt-tcmp-bars { margin-top: 6px; }
+.vt-takes .vt-tcmp-table { margin-top: 6px; border-top: 1px solid var(--divider); }
+.vt-takes .vt-tcmp-thead { display: flex; align-items: center; height: 28px; font-size: 13px; color: var(--muted); }
+.vt-takes .vt-tcmp-row {
+  display: flex; align-items: center; height: 26px; border-top: 1px solid var(--hover); font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+.vt-takes .vt-tcmp-label { flex: 1 1 auto; color: var(--muted); }
+.vt-takes .vt-tcmp-val {
+  flex: none; width: 96px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; text-align: right;
+}
+.vt-takes .vt-tcmp-row .vt-tcmp-val { color: var(--text-soft); font-weight: 400; }
+.vt-takes .vt-tcmp-row.is-diff .vt-tcmp-val { color: var(--gold-dim); font-weight: 600; }
+.vt-takes .vt-tcmp-note { margin: 8px 0 0; font-size: 13px; }
+.vt-takes .vt-tcmp-transport { margin-top: 6px; }
+.vt-takes .vt-tcmp-time { flex: none; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.vt-takes .vt-tcmp-spacer { flex: 1 1 auto; }
+.vt-takes .vt-tcmp-ab { width: 176px; }
+.vt-takes .vt-tcmp-ab .em-seg-face { font-size: 13px; }
+.vt-takes .vt-tcmp-buttons { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 10px; }
+.vt-takes .vt-tcmp-buttons .em-btn { flex: 1 1 0; }
+.vt-takes .vt-tcmp-buttons .vt-tcmp-reuse { flex: 1 1 100%; }
+
+/* the placeholder while fewer than two takes are pinned (M L843-847) */
+.vt-takes .vt-tcmp-empty { padding: 28px 18px; text-align: center; }
+.vt-takes .vt-tcmp-empty-title { margin: 0; font-size: 15px; color: var(--text); }
+.vt-takes .vt-tcmp-empty-text { margin: 6px 0 0; font-size: 13px; color: var(--muted); }

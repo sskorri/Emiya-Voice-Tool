@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Speak changes in the Emiya window</title>
+<style>
+  :root { color-scheme: dark; font: 15px/1.5 system-ui, sans-serif; background: #171717; color: #eee; }
+  body { max-width: 1280px; margin: 1rem auto; padding: 0 1rem; }
+  h1 { font-size: 1.25rem; margin: 0; }
+  p { margin: .35rem 0 1rem; }
+  nav, .versions { display: flex; gap: .5rem 1rem; flex-wrap: wrap; align-items: center; }
+  a { color: #d3dfff; }
+  a[aria-current="page"] { color: white; font-weight: 650; }
+  figure { margin: .75rem 0; }
+  figcaption { margin-bottom: .45rem; }
+  img { display: block; width: 100%; height: auto; }
+  [hidden] { display: none; }
+</style>
+<main>
+  <h1>Speak changes in the Emiya window</h1>
+  <p>Native window captures at 1280 × 800, before and after adding call controls to Emiya Voice. Select a screenshot to open it at full size.</p>
+  <nav aria-label="Screenshots">
+    <a href="#speak">Speak</a>
+    <a href="#takes">Takes</a>
+    <a href="#chat">Settings · Voice Chat</a>
+    <a href="#keys">Settings · Keys</a>
+  </nav>
+  <figure>
+    <figcaption>
+      <div class="versions">
+        <strong id="caption">Speak</strong>
+        <label id="comparison">Compare
+          <select id="version" aria-label="Window version">
+            <option value="original">Original layout</option>
+            <option value="preview">With call controls</option>
+          </select>
+        </label>
+      </div>
+    </figcaption>
+    <a id="full" href="screens/original-speak.png"><img id="capture" src="screens/original-speak.png"
+      width="1280" height="800" alt="Speak page in the original Emiya layout"></a>
+  </figure>
+</main>
+<script>
+  const pages = {
+    speak: ['Speak', 'speak', true],
+    takes: ['Takes', 'takes', true],
+    chat: ['Settings · Voice Chat', 'voice-chat', false],
+    keys: ['Settings · Keys', 'keys', false],
+  };
+  const version = document.querySelector('#version');
+  function show() {
+    const id = Object.hasOwn(pages, location.hash.slice(1)) ? location.hash.slice(1) : 'speak';
+    const [title, file, paired] = pages[id];
+    const mode = paired ? version.value : 'preview';
+    const path = 'screens/' + mode + '-' + file + '.png';
+    document.querySelector('#caption').textContent = title;
+    document.querySelector('#comparison').hidden = !paired;
+    const capture = document.querySelector('#capture');
+    capture.src = document.querySelector('#full').href = path;
+    capture.alt = title + ' in the ' + (mode === 'original' ? 'original Emiya window' : 'Emiya window with call controls');
+    for (const link of document.querySelectorAll('nav a')) {
+      if (link.hash === '#' + id) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
+    }
+  }
+  window.addEventListener('hashchange', show);
+  version.addEventListener('change', show);
+  show();
+</script>
+</html>
